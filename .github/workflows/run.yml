@@ -1,0 +1,45 @@
+name: Job search
+
+on:
+  schedule:
+    - cron: "30 5,14 * * *"     # 06:30 and 15:30 UK time (05:30/14:30 UTC in BST; an hour later in winter)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: job-search
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Run pipeline
+        env:
+          REED_KEY: ${{ secrets.REED_KEY }}
+          ADZUNA_ID: ${{ secrets.ADZUNA_ID }}
+          ADZUNA_KEY: ${{ secrets.ADZUNA_KEY }}
+          GEMINI_KEY: ${{ secrets.GEMINI_KEY }}
+          APPS_SCRIPT_URL: ${{ secrets.APPS_SCRIPT_URL }}
+          SHEET_SECRET: ${{ secrets.SHEET_SECRET }}
+        run: python -m jobhunter run
+
+      - name: Commit run summary (keeps the schedule alive and feeds the portal)
+        run: |
+          git config user.name "job-hunter-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add portal/data/summary.json
+          git diff --cached --quiet || git commit -m "run: $(date -u +'%Y-%m-%d %H:%M') UTC"
+          git push
