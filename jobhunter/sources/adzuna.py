@@ -9,7 +9,7 @@ import httpx
 
 from ..config import ENV
 from ..models import Job, parse_uk_date, strip_html
-from . import SourceContext
+from . import SourceContext, safe_err
 
 NAME = "adzuna"
 BASE = "https://api.adzuna.com/v1/api/jobs/gb/search"
@@ -85,5 +85,5 @@ def fetch(settings: dict, ctx: SourceContext) -> list[Job]:
                     if job.url:
                         seen.setdefault(job.job_id, job)
             except httpx.HTTPError as e:
-                ctx.errors.append(f"adzuna {p}: {e}")
+                ctx.errors.append(f"adzuna {p}: {safe_err(e)}")
     return list(seen.values())

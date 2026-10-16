@@ -10,7 +10,7 @@ import httpx
 
 from ..config import ENV
 from ..models import Job, parse_uk_date, strip_html
-from . import SourceContext
+from . import SourceContext, safe_err
 
 NAME = "reed"
 BASE = "https://www.reed.co.uk/api/1.0"
@@ -104,7 +104,7 @@ def fetch(settings: dict, ctx: SourceContext) -> list[Job]:
                     job = _to_job(item)
                     seen.setdefault(job.job_id, job)
             except httpx.HTTPError as e:
-                ctx.errors.append(f"reed {p}: {e}")
+                ctx.errors.append(f"reed {p}: {safe_err(e)}")
     return list(seen.values())
 
 
@@ -113,7 +113,7 @@ def enrich(job: Job, ctx: SourceContext) -> Job:
     try:
         d = ctx.get(f"{BASE}/jobs/{job.external_id}", auth=_auth()).json()
     except (httpx.HTTPError, ValueError) as e:
-        ctx.errors.append(f"reed detail {job.external_id}: {e}")
+        ctx.errors.append(f"reed detail {job.external_id}: {safe_err(e)}")
         return job
     if not d or "jobId" not in d:
         return job

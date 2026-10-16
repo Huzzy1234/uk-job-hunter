@@ -5,6 +5,7 @@ pipeline can log per-source counts and keep inside free-tier quotas.
 """
 from __future__ import annotations
 
+import re
 import time
 from dataclasses import dataclass, field
 
@@ -13,6 +14,13 @@ import httpx
 from ..models import Job
 
 USER_AGENT = "uk-job-hunter/0.1 (personal job search tool; contact via GitHub Huzzy1234)"
+
+_QUERY = re.compile(r"\?[^'\" ]*")
+
+
+def safe_err(e: Exception) -> str:
+    """Error text with any query string removed, so API keys never reach logs or the Sheet."""
+    return _QUERY.sub("?…", f"{type(e).__name__}: {e}")[:300]
 
 
 @dataclass
@@ -45,4 +53,4 @@ def registry() -> dict[str, object]:
     return {m.NAME: m for m in (reed, adzuna)}
 
 
-__all__ = ["Job", "SourceContext", "make_context", "registry"]
+__all__ = ["Job", "SourceContext", "make_context", "registry", "safe_err"]
