@@ -168,6 +168,14 @@ _DAYS = re.compile(r"\b(\d|one|two|three|four|five)\s*(?:-|to)?\s*(\d|one|two|th
 _FTE = re.compile(r"\b(0\.\d{1,2})\s*fte\b", re.I)
 
 
+_DAYS_CONTEXT = re.compile(r"home|remote|office|hybrid|on[- ]site|onsite|wfh", re.I)
+_NOT_REALLY_REMOTE = re.compile(r"occasional|some|option|flexib|hybrid|partly|partial|element of|ad[- ]hoc|day[s]? (a|per) week", re.I)
+
+
+def _context(text: str, m: re.Match, before: int = 45, after: int = 30) -> str:
+    return text[max(0, m.start() - before): m.end() + after]
+
+
 def detect_hours(text: str) -> float | None:
     """Hours per week stated in free text, or None."""
     t = text.lower()
@@ -180,8 +188,11 @@ def detect_hours(text: str) -> float | None:
     m = _FTE.search(t)
     if m:
         return round(float(m.group(1)) * FTE_HOURS, 1)
-    m = _DAYS.search(t)
-    if m:
+    for m in _DAYS.finditer(t):
+        # "2 days a week in the office" describes location, not hours.
+        if _DAYS_CONTEXT.search(_context(t, m)):
+            continue
+
         def num(g):
             return None if g is None else (_WORD_NUM.get(g.lower()) or int(g))
         a, b = num(m.group(1)), num(m.group(2))
@@ -207,7 +218,12 @@ _REMOTE = re.compile(
     re.I,
 )
 _REMOTE_TITLE = re.compile(r"\bremote\b|\bwfh\b|home[- ]based", re.I)
-_HYBRID = re.compile(r"\bhybrid\b|\d\s*days?\s*(in|at)\s*(the\s*)?office|office\s*\d\s*days", re.I)
+_HYBRID = re.compile(
+    r"\bhybrid\b|\d\s*days?\s*(in|at|per week in)\s*(the\s*)?office|office\s*\d\s*days|"
+    r"\d\s*days?\s*(office|on[- ]site|onsite)[- ]based|\d\s*days?\s*(working |work )?(from|at) home|"
+    r"split between (home|office)",
+    re.I,
+)
 _LONDON = re.compile(r"\blondon\b|\bEC[1-4]|\bWC[12]|\bE1\b|\bSE1\b", re.I)
 
 
@@ -238,8 +254,11 @@ def detect_remote(text: str, location: str = "", title: str = "") -> Remote:
         return "remote"
     if _HYBRID.search(text):
         return "hybrid"
-    if _REMOTE_TITLE.search(title) or _REMOTE.search(text):
+    if _REMOTE_TITLE.search(title):
         return "remote"
+    for m in _REMOTE.finditer(text):
+        if not _NOT_REALLY_REMOTE.search(_context(text, m)):
+            return "remote"
     return "unknown"
 
 

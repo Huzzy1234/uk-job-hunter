@@ -32,6 +32,8 @@ def ev(**kw) -> Job:
     ("0.6 FTE", 22.5),
     ("15-20 hours per week", 20),
     ("no hours mentioned", None),
+    ("hybrid: 2 days a week in the office, rest from home", None),
+    ("you can work 1 day a week from home", None),
 ])
 def test_detect_hours(text, hours):
     assert detect_hours(text) == hours
