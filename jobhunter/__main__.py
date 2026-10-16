@@ -17,7 +17,7 @@ from .config import ENV, LOCAL_DIR, ROOT, coerce_settings
 
 def cmd_run(a):
     from .pipeline import run
-    run(dry_run=a.dry_run, only_source=a.source)
+    run(dry_run=a.dry_run, only_source=a.source, use_ai=not a.no_ai)
 
 
 def cmd_fetch(a):
@@ -72,7 +72,8 @@ def main(argv=None):
     p = argparse.ArgumentParser(prog="jobhunter", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = p.add_subparsers(dest="cmd", required=True)
 
-    r = sub.add_parser("run"); r.add_argument("--dry-run", action="store_true"); r.add_argument("--source"); r.set_defaults(f=cmd_run)
+    r = sub.add_parser("run"); r.add_argument("--dry-run", action="store_true"); r.add_argument("--source")
+    r.add_argument("--no-ai", action="store_true", help="skip Gemini scoring"); r.set_defaults(f=cmd_run)
     f = sub.add_parser("fetch"); f.add_argument("--source", required=True); f.add_argument("--limit", type=int, default=25)
     f.add_argument("--show-dropped", action="store_true"); f.set_defaults(f=cmd_fetch)
     sub.add_parser("setup").set_defaults(f=cmd_setup)

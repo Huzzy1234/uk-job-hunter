@@ -70,9 +70,15 @@ class SheetAPI:
         return self.get("settings").get("settings", {})
 
     def known_jobs(self) -> dict[str, dict]:
-        """job_id -> {status, title, company, location}"""
+        """job_id -> {status, title, company, location, score, why, red_flags}"""
         rows = self.get("ids").get("rows", [])
         return {r["job_id"]: r for r in rows if r.get("job_id")}
+
+    def profile(self) -> dict:
+        try:
+            return self.get("profile").get("profile", {})
+        except SheetError:
+            return {}
 
     def upsert_jobs(self, rows: list[dict]) -> dict:
         return self.post("upsert_jobs", jobs=rows)

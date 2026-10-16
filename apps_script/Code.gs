@@ -13,7 +13,7 @@
 const SECRET = '__SHEET_SECRET__';
 const GITHUB_REPO = '__GITHUB_REPO__';   // owner/repo — used by the Run now button
 const TZ = 'Europe/London';
-const VERSION = '0.1.0';
+const VERSION = '0.2.0';
 
 const TAB = { jobs: 'Jobs', dropped: 'Dropped', settings: 'Settings', log: 'Log', profile: 'Profile', links: 'Links' };
 
@@ -130,7 +130,8 @@ const ACTIONS = {
   set_settings: (body) => { writeSettings_(body.settings || {}); return { settings: readSettings_() }; },
 
   ids: () => ({ rows: readJobs_().map(j => ({
-    job_id: j.job_id, status: j.Status, title: j.Title, company: j.Company, location: j.Location, last_seen: j['Last seen'],
+    job_id: j.job_id, status: j.Status, title: j.Title, company: j.Company, location: j.Location,
+    last_seen: j['Last seen'], score: j.Score, why: j['Why it fits'], red_flags: j['Red flags'],
   })) }),
   jobs: (body, p) => {
     const q = Object.assign({}, p, body);
@@ -180,7 +181,15 @@ function sheet_(name, headers) {
   const hdr = sh.getRange(1, 1, 1, headers.length);
   hdr.setFontWeight('bold').setBackground('#1f2937').setFontColor('#ffffff');
   sh.setFrozenRows(1);
+  textColumns_(sh, headers);
   return sh;
+}
+
+const TEXT_COLUMNS = ['First seen', 'Last seen', 'Posted', 'Run time', 'Seen', 'Apply', 'Link', 'job_id'];
+
+function cell_(v) {
+  if (v instanceof Date) return Utilities.formatDate(v, TZ, 'yyyy-MM-dd HH:mm').replace(' 00:00', '');
+  return v;
 }
 
 function readTable_(sh) {
@@ -190,8 +199,15 @@ function readTable_(sh) {
   const headers = values[0].map(String);
   return values.slice(1).filter(r => r.some(c => c !== '')).map(r => {
     const o = {};
-    headers.forEach((h, i) => { if (h) o[h] = r[i]; });
+    headers.forEach((h, i) => { if (h) o[h] = cell_(r[i]); });
     return o;
+  });
+}
+
+// Timestamps, URLs and ids are stored as plain text so Sheets never re-types them.
+function textColumns_(sh, headers) {
+  headers.forEach((h, i) => {
+    if (TEXT_COLUMNS.indexOf(h) >= 0) sh.getRange(1, i + 1, Math.max(sh.getMaxRows(), 2), 1).setNumberFormat('@');
   });
 }
 

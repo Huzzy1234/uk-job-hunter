@@ -10,6 +10,7 @@ from .config import LOCAL_DIR, PORTAL_DATA, coerce_settings
 from .dedupe import dedupe
 from .models import Job, enrich_from_text
 from .rules import evaluate, heuristic_score, heuristic_why
+from .score import score_jobs
 from .sheet_api import SheetAPI, SheetError
 from .sources import make_context, registry
 
@@ -51,7 +52,7 @@ def dropped_row(job: Job) -> dict:
     }
 
 
-def run(*, dry_run: bool = False, only_source: str | None = None, verbose: bool = True) -> dict:
+def run(*, dry_run: bool = False, only_source: str | None = None, verbose: bool = True, use_ai: bool = True) -> dict:
     t0 = time.time()
     api: SheetAPI | None = None
     raw_settings: dict = {}
@@ -114,8 +115,24 @@ def run(*, dry_run: bool = False, only_source: str | None = None, verbose: bool 
         if "pay-estimated" in job.tags:
             job.red_flags.append("pay is Adzuna's estimate")
 
-    kept.sort(key=lambda j: (-(j.score or 0), j.posted or datetime.min.date()), reverse=False)
+    # AI scoring for jobs the Sheet hasn't scored yet; rows already scored keep their values.
     new_ids = [j.job_id for j in kept if j.job_id not in known]
+    to_score = [j for j in kept if j.job_id not in known or not str(known[j.job_id].get("score", "")).strip()]
+    gemini_calls = 0
+    if use_ai and to_score:
+        profile = api.profile() if api else None
+        gemini_calls = score_jobs(to_score, profile, ctx.errors)
+        if verbose:
+            print(f"  gemini: scored {sum('ai-scored' in j.tags for j in to_score)}/{len(to_score)} in {gemini_calls} calls")
+    for j in kept:
+        prev = known.get(j.job_id)
+        if prev and j not in to_score and str(prev.get("score", "")).strip():
+            j.score = int(float(prev["score"]))
+            j.why = prev.get("why") or j.why
+            if prev.get("red_flags"):
+                j.red_flags = [f for f in str(prev["red_flags"]).split("; ") if f]
+
+    kept.sort(key=lambda j: (-(j.score or 0), j.posted or datetime.min.date()), reverse=False)
     duration = round(time.time() - t0, 1)
 
     summary = {
@@ -128,6 +145,7 @@ def run(*, dry_run: bool = False, only_source: str | None = None, verbose: bool 
         "dropped": len(dropped),
         "collapsed_duplicates": collapsed,
         "api_calls": ctx.calls,
+        "gemini_calls": gemini_calls,
         "errors": ctx.errors,
         "duration_s": duration,
         "drop_reasons": Counter(j.drop_reason.split(" (")[0] for j in dropped).most_common(12),
@@ -143,7 +161,7 @@ def run(*, dry_run: bool = False, only_source: str | None = None, verbose: bool 
             "Run time": summary["last_run"], "Source": ", ".join(enabled), "Fetched": len(fetched),
             "Kept": len(kept), "New": res.get("new", ""), "Dropped": len(dropped),
             "Errors": "; ".join(ctx.errors)[:500], "Duration s": duration,
-            "Notes": f"{ctx.calls} API calls, {collapsed} duplicates collapsed, {enriched} details fetched",
+            "Notes": f"{ctx.calls} API calls, {gemini_calls} Gemini calls, {collapsed} duplicates collapsed, {enriched} details fetched",
         })
     else:
         LOCAL_DIR.mkdir(exist_ok=True)
