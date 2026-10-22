@@ -1,23 +1,23 @@
 {
- "last_run": "2026-10-22 10:27",
+ "last_run": "2026-10-22 18:44",
  "mode": "part_time",
  "sources": {
-  "reed": 308,
-  "adzuna": 42
+  "reed": 315,
+  "adzuna": 41
  },
- "fetched": 350,
+ "fetched": 356,
  "kept": 6,
  "new": 0,
- "dropped": 340,
+ "dropped": 346,
  "collapsed_duplicates": 4,
  "api_calls": 70,
  "gemini_calls": 1,
  "errors": [],
- "duration_s": 104.5,
+ "duration_s": 114.9,
  "drop_reasons": [
   [
    "title not a finance role",
-   240
+   243
   ],
   [
    "older than 21 days",
@@ -36,16 +36,16 @@
    10
   ],
   [
-   "self-employed / freelance",
-   5
-  ],
-  [
    "hybrid outside Bristol area",
-   5
+   6
   ],
   [
    "London, not remote",
-   3
+   5
+  ],
+  [
+   "self-employed / freelance",
+   5
   ],
   [
    "22.5 hrs/week is over the 20-hour limit temp, no vacation window within 5 weeks",
@@ -68,10 +68,28 @@
   {
    "title": "Remote- AI Training Role - Accountants (Audit/Financial Reporting/Technical Accounting or Tax)",
    "company": "Arcturus T/A Anthem Consulting",
-   "score": 83,
+   "score": 93,
    "pay": "\u00a375\u2013\u00a3125/hr",
    "hours": "8 hrs/wk, hours: confirm",
    "url": "https://www.reed.co.uk/jobs/remote-ai-training-role-accountants-audit-financial-reporting-technical-accounting-or-tax/57477184",
+   "new": false
+  },
+  {
+   "title": "Management Accountant",
+   "company": "SQEP Ltd",
+   "score": 77,
+   "pay": "\u00a335,000\u2013\u00a345,000/yr FTE",
+   "hours": "part-time, hours: confirm",
+   "url": "https://www.adzuna.co.uk/jobs/details/5917671554?utm_medium=api&utm_source=dbe83e26",
+   "new": false
+  },
+  {
+   "title": "Accounts Semi Senior",
+   "company": "Taylor Rose Recruitment Ltd",
+   "score": 75,
+   "pay": "\u00a345,000/yr FTE",
+   "hours": "part-time, hours: confirm",
+   "url": "https://www.adzuna.co.uk/jobs/details/5906389101?utm_medium=api&utm_source=dbe83e26",
    "new": false
   },
   {
@@ -84,15 +102,6 @@
    "new": false
   },
   {
-   "title": "Management Accountant",
-   "company": "SQEP Ltd",
-   "score": 75,
-   "pay": "\u00a335,000\u2013\u00a345,000/yr FTE",
-   "hours": "part-time, hours: confirm",
-   "url": "https://www.adzuna.co.uk/jobs/details/5917671554?utm_medium=api&utm_source=dbe83e26",
-   "new": false
-  },
-  {
    "title": "Part Time Accounts Assistant",
    "company": "Hays Specialist Recruitment Limited",
    "score": 70,
@@ -102,18 +111,9 @@
    "new": false
   },
   {
-   "title": "Accounts Semi Senior",
-   "company": "Taylor Rose Recruitment Ltd",
-   "score": 69,
-   "pay": "\u00a345,000/yr FTE",
-   "hours": "part-time, hours: confirm",
-   "url": "https://www.adzuna.co.uk/jobs/details/5906389101?utm_medium=api&utm_source=dbe83e26",
-   "new": false
-  },
-  {
    "title": "Interim Accountant - Morgan McKinley",
    "company": "eFinancialCareers",
-   "score": 25,
+   "score": 45,
    "pay": "",
    "hours": "temp, hours: confirm",
    "url": "https://www.reed.co.uk/jobs/interim-accountant-morgan-mckinley/57453611",
