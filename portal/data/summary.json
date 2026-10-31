@@ -1,23 +1,23 @@
 {
- "last_run": "2026-10-31 11:04",
+ "last_run": "2026-10-31 18:42",
  "mode": "part_time",
  "sources": {
   "reed": 315,
-  "adzuna": 56
+  "adzuna": 54
  },
- "fetched": 371,
+ "fetched": 369,
  "kept": 3,
  "new": 0,
- "dropped": 364,
+ "dropped": 362,
  "collapsed_duplicates": 4,
  "api_calls": 71,
  "gemini_calls": 1,
  "errors": [],
- "duration_s": 103.2,
+ "duration_s": 100.6,
  "drop_reasons": [
   [
    "title not a finance role",
-   247
+   245
   ],
   [
    "older than 21 days",
@@ -66,21 +66,21 @@
  ],
  "top": [
   {
-   "title": "Interim Part-Time Finance Officer",
-   "company": "Hays Specialist Recruitment Limited",
-   "score": 85,
-   "pay": "\u00a316\u2013\u00a318.5/hr",
-   "hours": "20 hrs/wk, temp",
-   "url": "https://www.reed.co.uk/jobs/interim-part-time-finance-officer/57508494",
+   "title": "Remote- AI Training Role for Accountants (Audit/Financial Reporting/Technical Accounting or Tax)",
+   "company": "Arcturus T/A Anthem Consulting",
+   "score": 93,
+   "pay": "\u00a375\u2013\u00a3125/hr",
+   "hours": "hours: confirm",
+   "url": "https://www.reed.co.uk/jobs/remote-ai-training-role-for-accountants-audit-financial-reporting-technical-accounting-or-tax/57477184",
    "new": false
   },
   {
-   "title": "Remote- AI Training Role for Accountants (Audit/Financial Reporting/Technical Accounting or Tax)",
-   "company": "Arcturus T/A Anthem Consulting",
-   "score": 33,
-   "pay": "\u00a375\u2013\u00a3125/hr",
-   "hours": "8 hrs/wk, hours: confirm",
-   "url": "https://www.reed.co.uk/jobs/remote-ai-training-role-for-accountants-audit-financial-reporting-technical-accounting-or-tax/57477184",
+   "title": "Interim Part-Time Finance Officer",
+   "company": "Hays Specialist Recruitment Limited",
+   "score": 80,
+   "pay": "\u00a316\u2013\u00a318.5/hr",
+   "hours": "20 hrs/wk, temp",
+   "url": "https://www.reed.co.uk/jobs/interim-part-time-finance-officer/57508494",
    "new": false
   },
   {
