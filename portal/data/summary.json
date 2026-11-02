@@ -1,23 +1,23 @@
 {
- "last_run": "2026-11-02 13:45",
+ "last_run": "2026-11-02 22:53",
  "mode": "part_time",
  "sources": {
-  "reed": 315,
-  "adzuna": 57
+  "reed": 319,
+  "adzuna": 62
  },
- "fetched": 372,
- "kept": 3,
- "new": 0,
- "dropped": 365,
- "collapsed_duplicates": 4,
- "api_calls": 71,
+ "fetched": 381,
+ "kept": 5,
+ "new": 2,
+ "dropped": 371,
+ "collapsed_duplicates": 5,
+ "api_calls": 74,
  "gemini_calls": 1,
  "errors": [],
- "duration_s": 124.1,
+ "duration_s": 112.0,
  "drop_reasons": [
   [
    "title not a finance role",
-   246
+   250
   ],
   [
    "older than 21 days",
@@ -25,15 +25,15 @@
   ],
   [
    "outside Bristol area",
-   26
+   27
   ],
   [
    "full-time temp, no vacation window within 5 weeks",
-   11
+   12
   ],
   [
    "title excluded",
-   11
+   12
   ],
   [
    "hybrid outside Bristol area",
@@ -52,11 +52,11 @@
    3
   ],
   [
-   "25 hrs/week is over the 20-hour limit temp, no vacation window within 5 weeks",
-   3
+   "37.5 hrs/week is over the 20-hour limit temp, no vacation window within 5 weeks",
+   2
   ],
   [
-   "37.5 hrs/week is over the 20-hour limit temp, no vacation window within 5 weeks",
+   "25 hrs/week is over the 20-hour limit temp, no vacation window within 5 weeks",
    2
   ],
   [
@@ -65,6 +65,15 @@
   ]
  ],
  "top": [
+  {
+   "title": "Remote- AI Training Role for Accountants (Audit/Financial Reporting/Technical Accounting or Tax)",
+   "company": "Arcturus T/A Anthem Consulting",
+   "score": 93,
+   "pay": "\u00a375\u2013\u00a3125/hr",
+   "hours": "hours: confirm",
+   "url": "https://www.reed.co.uk/jobs/remote-ai-training-role-for-accountants-audit-financial-reporting-technical-accounting-or-tax/57477184",
+   "new": false
+  },
   {
    "title": "Interim Part-Time Finance Officer",
    "company": "Hays Specialist Recruitment Limited",
@@ -75,28 +84,37 @@
    "new": false
   },
   {
-   "title": "Accounts Assistant",
-   "company": "Axon Moore",
-   "score": 25,
-   "pay": "\u00a325,000\u2013\u00a330,000/yr FTE",
-   "hours": "part-time, contract, hours: confirm",
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5939403808?se=ZsEqicPW8RGTubz_n9XXLQ&utm_medium=api&utm_source=dbe83e26&v=949F8574107E8D2E3BD368943424927BA9185F95",
-   "new": false
+   "title": "Finance & Business Support Administrator",
+   "company": "Bulb Resourcing",
+   "score": 75,
+   "pay": "\u00a330,000/yr FTE",
+   "hours": "15 hrs/wk",
+   "url": "https://www.adzuna.co.uk/jobs/details/5951005454?utm_medium=api&utm_source=dbe83e26",
+   "new": true
   },
   {
-   "title": "Remote- AI Training Role for Accountants (Audit/Financial Reporting/Technical Accounting or Tax)",
-   "company": "Arcturus T/A Anthem Consulting",
-   "score": 23,
-   "pay": "\u00a375\u2013\u00a3125/hr",
-   "hours": "8 hrs/wk, hours: confirm",
-   "url": "https://www.reed.co.uk/jobs/remote-ai-training-role-for-accountants-audit-financial-reporting-technical-accounting-or-tax/57477184",
+   "title": "Payroll Manager",
+   "company": "Payroll Elite Ltd",
+   "score": 63,
+   "pay": "\u00a346,000\u2013\u00a350,000/yr FTE",
+   "hours": "15 hrs/wk, permanent, hours: confirm",
+   "url": "https://www.reed.co.uk/jobs/payroll-manager/57515456",
+   "new": true
+  },
+  {
+   "title": "Accounts Assistant",
+   "company": "Axon Moore",
+   "score": 5,
+   "pay": "\u00a325,000\u2013\u00a330,000/yr FTE",
+   "hours": "part-time, contract, hours: confirm",
+   "url": "https://www.adzuna.co.uk/jobs/details/5939403808?utm_medium=api&utm_source=dbe83e26",
    "new": false
   }
  ],
  "sheet": {
-  "new": 0,
+  "new": 2,
   "updated": 3,
-  "total": 16,
+  "total": 18,
   "ok": true
  }
 }
