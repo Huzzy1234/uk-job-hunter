@@ -1,19 +1,19 @@
 {
- "last_run": "2026-11-03 12:57",
+ "last_run": "2026-11-03 20:35",
  "mode": "part_time",
  "sources": {
   "reed": 312,
-  "adzuna": 62
+  "adzuna": 64
  },
- "fetched": 374,
- "kept": 5,
- "new": 0,
- "dropped": 365,
+ "fetched": 376,
+ "kept": 6,
+ "new": 1,
+ "dropped": 366,
  "collapsed_duplicates": 4,
- "api_calls": 70,
+ "api_calls": 72,
  "gemini_calls": 1,
  "errors": [],
- "duration_s": 107.0,
+ "duration_s": 111.6,
  "drop_reasons": [
   [
    "title not a finance role",
@@ -25,7 +25,7 @@
   ],
   [
    "outside Bristol area",
-   26
+   27
   ],
   [
    "title excluded",
@@ -48,6 +48,10 @@
    4
   ],
   [
+   "37 hrs/week is over the 20-hour limit temp, no vacation window within 5 weeks",
+   3
+  ],
+  [
    "22.5 hrs/week is over the 20-hour limit temp, no vacation window within 5 weeks",
    3
   ],
@@ -58,21 +62,17 @@
   [
    "25 hrs/week is over the 20-hour limit temp, no vacation window within 5 weeks",
    2
-  ],
-  [
-   "24 hrs/week is over the 20-hour limit, not a temp role",
-   2
   ]
  ],
  "top": [
   {
-   "title": "Remote- AI Training Role for Accountants (Audit/Financial Reporting/Technical Accounting or Tax)",
-   "company": "Arcturus T/A Anthem Consulting",
-   "score": 93,
-   "pay": "\u00a375\u2013\u00a3125/hr",
-   "hours": "8 hrs/wk, hours: confirm",
-   "url": "https://www.reed.co.uk/jobs/remote-ai-training-role-for-accountants-audit-financial-reporting-technical-accounting-or-tax/57477184",
-   "new": false
+   "title": "payroll Administrator",
+   "company": "Reed",
+   "score": 88,
+   "pay": "\u00a316/hr",
+   "hours": "9 hrs/wk, temp",
+   "url": "https://www.reed.co.uk/jobs/payroll-administrator/57472695",
+   "new": true
   },
   {
    "title": "Finance & Business Support Administrator",
@@ -86,7 +86,7 @@
   {
    "title": "Interim Part-Time Finance Officer",
    "company": "Hays Specialist Recruitment Limited",
-   "score": 85,
+   "score": 83,
    "pay": "\u00a316\u2013\u00a318.5/hr",
    "hours": "20 hrs/wk, temp",
    "url": "https://www.reed.co.uk/jobs/interim-part-time-finance-officer/57508494",
@@ -102,19 +102,28 @@
    "new": false
   },
   {
+   "title": "Remote- AI Training Role for Accountants (Audit/Financial Reporting/Technical Accounting or Tax)",
+   "company": "Arcturus T/A Anthem Consulting",
+   "score": 53,
+   "pay": "\u00a375\u2013\u00a3125/hr",
+   "hours": "hours: confirm",
+   "url": "https://www.reed.co.uk/jobs/remote-ai-training-role-for-accountants-audit-financial-reporting-technical-accounting-or-tax/57477184",
+   "new": false
+  },
+  {
    "title": "Accounts Assistant",
    "company": "Axon Moore",
-   "score": 15,
+   "score": 5,
    "pay": "\u00a325,000\u2013\u00a330,000/yr FTE",
    "hours": "part-time, contract, hours: confirm",
-   "url": "https://www.adzuna.co.uk/jobs/land/ad/5939403808?se=yvzrAIbX8RGkoLzvgzDRxQ&utm_medium=api&utm_source=dbe83e26&v=949F8574107E8D2E3BD368943424927BA9185F95",
+   "url": "https://www.adzuna.co.uk/jobs/details/5939403808?utm_medium=api&utm_source=dbe83e26",
    "new": false
   }
  ],
  "sheet": {
-  "new": 0,
+  "new": 1,
   "updated": 5,
-  "total": 18,
+  "total": 19,
   "ok": true
  }
 }
